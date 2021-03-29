@@ -54,3 +54,32 @@ WHERE last_name LIKE '%q%' AND last_name NOT LIKE '%qu%'
 GROUP BY first_name, last_name
 ORDER BY count(last_name) DESC;
 
+
+
+-- Question 7
+SELECT *
+FROM employees;
+
+SELECT gender, first_name, count(first_name)
+FROM employees
+WHERE (first_name = 'Irena' OR first_name = 'Vidya' OR first_name = 'Maya')
+GROUP BY gender, first_name;
+
+-- Question 8 
+-- using the large string we used to generate the lowercase usernames we can select the usernames with the large concat with substrings. Then selecting the count with the same concat and 
+-- rename this as count to clean up the output. Then since we have a new column aliased as username in the select statement we can use grop by usernames
+-- and order by username to generate all the duplicate usernames by also using a having statement to filter all 
+-- the usernames with a count of 1 because if they have a count of 1 they are not duplicates
+
+SELECT Lower(Concat(Substr(first_name,1,1),Substr(last_name,1,4),'_', Substr(birth_date,6,2), Substr(birth_date,3,2))) AS username,
+count(Lower(Concat(Substr(first_name,1,1),Substr(last_name,1,4),'_', Substr(birth_date,6,2),Substr(birth_date,3,2)))) AS count
+FROM employees
+GROUP BY username 
+HAVING count > 1
+ORDER BY count(username) DESC;
+
+
+
+
+
+
