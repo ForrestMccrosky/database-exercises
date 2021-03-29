@@ -70,6 +70,7 @@ GROUP BY gender, first_name;
 -- rename this as count to clean up the output. Then since we have a new column aliased as username in the select statement we can use grop by usernames
 -- and order by username to generate all the duplicate usernames by also using a having statement to filter all 
 -- the usernames with a count of 1 because if they have a count of 1 they are not duplicates
+-- The having count >1 returns a total of 13251 usernames that have duplicates
 
 SELECT Lower(Concat(Substr(first_name,1,1),Substr(last_name,1,4),'_', Substr(birth_date,6,2), Substr(birth_date,3,2))) AS username,
 count(Lower(Concat(Substr(first_name,1,1),Substr(last_name,1,4),'_', Substr(birth_date,6,2),Substr(birth_date,3,2)))) AS count
