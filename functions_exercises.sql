@@ -27,7 +27,7 @@ WHERE last_name LIKE ('e%e');
 -- who were also hired in the 90s using and like 199%
 -- To answer the question after select * I used the datediff function by subtracting the curdate from hire date and named it as 
 --Days worked using the AS
-SELECT *, datediff(curdate(),hire_date) AS 'Days Worked'
+SELECT *, datediff(curdate(),hire_date) AS 'Days_Worked'
 FROM employees
 WHERE birth_date LIKE '%12-25' AND hire_date LIKE '199%';
 
