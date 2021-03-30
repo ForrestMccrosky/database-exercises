@@ -11,7 +11,8 @@ FROM titles;
 
 -- Question 3
 -- By selecting the last_name column from employees we can use the where clause and like with the wildcard
--- 'e%e' to find all names. Then we can use the group by last_name to display all the unique last names 
+-- 'e%e' to find all names. Then we can use the group by last_name to display all the unique last names
+-- Eldridge, Erbe, Erde, Erie, Etalle 
 SELECT last_name
 FROM employees
 WHERE last_name LIKE 'e%e'
@@ -19,7 +20,7 @@ GROUP BY last_name;
 
 -- Question 4
 -- Question 4 is asking for the same thing as question 3 but wants to add the first name column. This is easily done
--- by adding the first_name column to our select statement and to our group by statement.
+-- by adding the first_name column to our select statement and to our group by statement. (returns 846 rows)
 SELECT first_name, last_name
 FROM employees
 WHERE last_name LIKE 'e%e' 
@@ -60,6 +61,17 @@ ORDER BY count(last_name) DESC;
 SELECT *
 FROM employees;
 
+-- Using the count method on the first_name to determine the amount of every employee with the first names Irena
+-- Vidya or Maya. then the question also wants to know the count of each employee's gender with those names. So
+-- in our select statement we need to have gender, first_name, and a first_name count.
+-- Then we simply group by gender and first name to display these resuslts.
+-- Irena M 144
+-- Maya M 146
+-- Vidya M 151
+-- Irena F 97
+-- Maya F 90
+-- Vidya F 81
+
 SELECT gender, first_name, count(first_name)
 FROM employees
 WHERE (first_name = 'Irena' OR first_name = 'Vidya' OR first_name = 'Maya')
@@ -69,8 +81,9 @@ GROUP BY gender, first_name;
 -- using the large string we used to generate the lowercase usernames we can select the usernames with the large concat with substrings. Then selecting the count with the same concat and 
 -- rename this as count to clean up the output. Then since we have a new column aliased as username in the select statement we can use grop by usernames
 -- and order by username to generate all the duplicate usernames by also using a having statement to filter all 
--- the usernames with a count of 1 because if they have a count of 1 they are not duplicates
--- The having count >1 returns a total of 13251 usernames that have duplicates
+-- the usernames with a count of 1 because if they have a count of 1 they are not duplicates. This means there are duplicate usernames 
+-- becuase some usernames are returning with a count of 1. In order to remove those non duplicates to find out the number of duplicate usernames with the number of rows output
+-- The having count >1 filter removes the non duplicate and returns only usernames with a count of 2 or above (aka the duplicate) and this block entirely returns a total of 13251 usernames that have duplicates.
 
 SELECT Lower(Concat(Substr(first_name,1,1),Substr(last_name,1,4),'_', Substr(birth_date,6,2), Substr(birth_date,3,2))) AS username,
 count(Lower(Concat(Substr(first_name,1,1),Substr(last_name,1,4),'_', Substr(birth_date,6,2),Substr(birth_date,3,2)))) AS count
