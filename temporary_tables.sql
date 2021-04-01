@@ -42,8 +42,7 @@ SELECT *
 FROM employees_with_departments;
 
 -- Question 1d
--- Another way we could have ended up with the same table is by creating an empty temporary table with the correct columns by using VARCHAR 
--- and int then updating the empty columns by pulling the information from the employees database.
+-- Another way we could have ended up with the same table is by building the concat in the original query
 
 -- Question 2
 
